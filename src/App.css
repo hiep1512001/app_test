@@ -1,7 +1,3 @@
-.App {
-  text-align: center;
-}
-
 .App-logo {
   height: 40vmin;
   pointer-events: none;
@@ -32,7 +28,70 @@
   from {
     transform: rotate(0deg);
   }
+
   to {
     transform: rotate(360deg);
   }
+}
+
+.size-report {
+  padding-left: 10px;
+  height: 1.7in;
+  width: 4in;
+}
+
+.text-report {
+  font-size: 10px;
+}
+
+.text-report-title {
+  font-size: 16px;
+  font-weight: 500;
+}
+
+.pagination {
+  display: flex;
+  list-style-type: none;
+  padding: 0;
+  margin: 20px 0;
+  justify-content: center;
+}
+
+.page-item {
+  margin: 0 5px;
+}
+
+.page-link {
+  padding: 8px 12px;
+  text-decoration: none;
+  background-color: #f1f1f1;
+  border: 1px solid #ddd;
+  border-radius: 4px;
+  color: #333;
+}
+
+.page-link:hover {
+  background-color: #ddd;
+}
+
+.previous,
+.next {
+  padding: 8px 12px;
+  background-color: #f1f1f1;
+  border: 1px solid #ddd;
+  border-radius: 4px;
+  color: #333;
+}
+
+.previous:hover,
+.next:hover {
+  background-color: #ddd;
+}
+
+.fixed-right {
+  position: fixed;
+  padding: 10px;
+  z-index: 100;
+  right: 0;
+  top: 0;
 }
