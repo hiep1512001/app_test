@@ -12,7 +12,7 @@ const App = () => {
     <div className="container-fluid">
       <div className="row d-flex text-center">
         {" "}
-        <h2>Bệnh viện nhân dân 115</h2>
+        <h2>BỆNH VIỆN NHÂN DÂN 115</h2>
       </div>
       <div>
         <BangDuLieu onPrint={reactToPrintFn}></BangDuLieu>

@@ -125,81 +125,84 @@ const BangDuLieu = (props) => {
                 <label className="form-label">Nhập file dữ liệu</label>
                 <input className="form-control" type="file" id="inputFile" onChange={handleValueChange} />
             </div>
-            <div className="row">
-                <div className='col-2'>
-                    <select className="form-select" value={timKiemTheo} onChange={(e) => {
-                        setTimKiemTheo(e.target.value)
+            <div style={data.length === 0 ? { display: 'none' } : { display: "block" }}>
+                <div className="row" >
+                    <div className='col-2'>
+                        <select className="form-select" value={timKiemTheo} onChange={(e) => {
+                            setTimKiemTheo(e.target.value)
 
-                    }}>
-                        <option value={"1"}>Theo tên sản phẩm</option>
-                        <option value={"2"}>Theo mã</option>
-                        <option value={"3"}>Theo khoa phòng</option>
-                    </select>
+                        }}>
+                            <option value={"1"}>Theo tên sản phẩm</option>
+                            <option value={"2"}>Theo mã</option>
+                            <option value={"3"}>Theo khoa phòng</option>
+                        </select>
+                    </div>
+                    <div className='col-5'>
+                        <div className="input-group ">
+                            <input type="text" className="form-control" placeholder="Nhập tên sản phẩm để tìm" value={search} onChange={handelValeISearchChange} onKeyDown={handleKeyDown} />
+                            <span className="btn btn-outline-success" onClick={() => {
+                                if (timKiemTheo === "1") {
+                                    hanndlSearchTen()
+                                }
+                                if (timKiemTheo === "2") {
+                                    hanndlSearchMa()
+                                }
+                                if (timKiemTheo === "3") {
+                                    hanndlSearchKhoaPhong()
+                                }
+                            }}><img style={{ width: '13px', margin: '0px 5px 0px 0px' }} src={iconSearch}></img>Tìm kiếm</span>
+                        </div>
+                    </div>
                 </div>
-                <div className='col-7'>
-                    <div className="input-group ">
-                        <input type="text" className="form-control" placeholder="Nhập tên sản phẩm để tìm" value={search} onChange={handelValeISearchChange} onKeyDown={handleKeyDown} />
-                        <span className="btn btn-outline-success" onClick={() => {
-                            if (timKiemTheo === "1") {
-                                hanndlSearchTen()
-                            }
-                            if (timKiemTheo === "2") {
-                                hanndlSearchMa()
-                            }
-                            if (timKiemTheo === "3") {
-                                hanndlSearchKhoaPhong()
-                            }
-                        }}><img style={{ width: '13px', margin: '0px 5px 0px 0px' }} src={iconSearch}></img>Tìm kiếm</span>
+                <div className='table-responsive' >
+                    <table className="table table-bordered table-striped table-hover ">
+                        <thead>
+                            <tr className="table-success">
+                                <th scope="col">Thao tác</th>
+                                <th scope="col">Mã tài sản</th>
+                                <th scope="col">Model</th>
+                                <th scope="col">Tên tài sản</th>
+                                <th scope="col">Serial</th>
+                                <th scope="col">Đơn vị tính</th>
+                                <th scope="col">Năm sử dụng</th>
+                                <th scope="col">Khoa phòng sử dụng</th>
+                                <th scope="col">Hảng sản xuất</th>
+                                <th scope="col">Nước sản xuất</th>
+                                <th scope="col">Số lượng theo sổ kế toán</th>
+                                <th scope="col">Nguyên giá theo sổ kế toán</th>
+                                <th scope="col">Số lượng theo kiểm kê</th>
+                                <th scope="col">Nguyên giá theo kiểm kê</th>
+                                <th scope="col">Chênh lệch thừa</th>
+                                <th scope="col">Chênh lệch thiếu</th>
+                                <th scope="col">Ghi chú</th>
+                                <th scope="col">Phân loại nguồn tài sản</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            {elementTable}
+                        </tbody>
+                    </table>
+                    <div className="col-12 d-flex justify-content-end">
+                        {" "}
+                        <ReactPaginate
+                            previousLabel={"Trước"}
+                            nextLabel={"Sau"}
+                            breakLabel={"..."}
+                            pageCount={Math.ceil(dataSearch.length / itemsPerPage)} // Số trang
+                            marginPagesDisplayed={2}
+                            pageRangeDisplayed={5}
+                            onPageChange={handlePageChange}
+                            containerClassName={"pagination"}
+                            pageClassName={"page-item"}
+                            pageLinkClassName={"page-link"}
+                            activeClassName={"active"}
+                            previousClassName={"previous"}
+                            nextClassName={"next"}
+                        />
                     </div>
                 </div>
             </div>
-            <div className='table-responsive'>
-                <table className="table table-bordered table-striped table-hover ">
-                    <thead>
-                        <tr className="table-success">
-                            <th scope="col">Thao tác</th>
-                            <th scope="col">Mã tài sản</th>
-                            <th scope="col">Model</th>
-                            <th scope="col">Tên tài sản</th>
-                            <th scope="col">Serial</th>
-                            <th scope="col">Đơn vị tính</th>
-                            <th scope="col">Năm sử dụng</th>
-                            <th scope="col">Khoa phòng sử dụng</th>
-                            <th scope="col">Hảng sản xuất</th>
-                            <th scope="col">Nước sản xuất</th>
-                            <th scope="col">Số lượng theo sổ kế toán</th>
-                            <th scope="col">Nguyên giá theo sổ kế toán</th>
-                            <th scope="col">Số lượng theo kiểm kê</th>
-                            <th scope="col">Nguyên giá theo kiểm kê</th>
-                            <th scope="col">Chênh lệch thừa</th>
-                            <th scope="col">Chênh lệch thiếu</th>
-                            <th scope="col">Ghi chú</th>
-                            <th scope="col">Phân loại nguồn tài sản</th>
-                        </tr>
-                    </thead>
-                    <tbody>
-                        {elementTable}
-                    </tbody>
-                </table>
-                <div className="col-12 d-flex justify-content-end">
-                    {" "}
-                    <ReactPaginate
-                        previousLabel={"Trước"}
-                        nextLabel={"Sau"}
-                        breakLabel={"..."}
-                        pageCount={Math.ceil(dataSearch.length / itemsPerPage)} // Số trang
-                        marginPagesDisplayed={2}
-                        pageRangeDisplayed={5}
-                        onPageChange={handlePageChange}
-                        containerClassName={"pagination"}
-                        pageClassName={"page-item"}
-                        pageLinkClassName={"page-link"}
-                        activeClassName={"active"}
-                        previousClassName={"previous"}
-                        nextClassName={"next"}
-                    />
-                </div>
-            </div>
+
         </div>
 
     )
