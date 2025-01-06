@@ -1,16 +1,20 @@
 import { useState } from 'react'
 import * as XLSX from 'xlsx';
+import { useNavigate } from "react-router-dom";
 import ReactPaginate from "react-paginate";
 import fileData from "../static/data.xlsx"
+import Cookies from 'js-cookie';
 import iconDownload from "../../src/static/icons/download.png"
 import iconPrinter from "../../src/static/icons/printing.png"
 import iconSearch from "../../src/static/icons/search.png"
+import iconLogOut from "../../src/static/icons/logout.png"
 //redux
 import { connect } from "react-redux";
 import * as action from "../actions/index"
 const BangDuLieu = (props) => {
     const [timKiemTheo, setTimKiemTheo] = useState("1")
     const [search, setSearch] = useState("")
+    const navigate = useNavigate();
     const [data, setData] = useState([
     ]);
     const [dataSearch, setDataSearch] = useState([])
@@ -118,8 +122,12 @@ const BangDuLieu = (props) => {
     return (
         <div>
             <div className='fixed-right'>
-                <a className="btn btn-warning" href={fileData} download={"File dữ liệu mẫu"}>
+                <a className="btn btn-warning me-1" href={fileData} download={"File dữ liệu mẫu"}>
                     <img src={iconDownload} style={{ width: '13px', margin: '0px 5px 0px 0px' }}></img>Tải file mẫu</a>
+                <button className='btn btn-outline-danger' onClick={() => {
+                    Cookies.remove('userNameReportTCKT');
+                    navigate("/login");
+                }}><img src={iconLogOut} style={{ width: '13px', margin: '0px 5px 0px 0px' }} />Đăng xuất</button>
             </div>
             <div className='mb-2'>
                 <label className="form-label">Nhập file dữ liệu</label>
